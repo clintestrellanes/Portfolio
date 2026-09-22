@@ -14,7 +14,7 @@ export const ConnectModal: React.FC<ConnectModalProps> = ({ isOpen, onClose }) =
     name: '',
     email: '',
     message: '',
-    service: 'Design & Frontend Engineering',
+    service: 'Full-Stack & AI Engineering',
   });
 
   const emailAddress = 'clintestrellanes@gmail.com';
@@ -30,7 +30,7 @@ export const ConnectModal: React.FC<ConnectModalProps> = ({ isOpen, onClose }) =
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);
-      setFormData({ name: '', email: '', message: '', service: 'Design & Frontend Engineering' });
+      setFormData({ name: '', email: '', message: '', service: 'Full-Stack & AI Engineering' });
       onClose();
     }, 2400);
   };
@@ -151,10 +151,10 @@ export const ConnectModal: React.FC<ConnectModalProps> = ({ isOpen, onClose }) =
                     onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                     className="w-full px-3.5 py-2 rounded-xl border border-neutral-300 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900 bg-white"
                   >
-                    <option>Design & Frontend Engineering</option>
-                    <option>Brand Identity & Spatial Design</option>
-                    <option>3D Interactive & WebGL</option>
-                    <option>Full-Time Role / Advisory</option>
+                    <option>Full-Stack & AI Engineering</option>
+                    <option>Applied AI & RAG Systems</option>
+                    <option>Web Platform Development</option>
+                    <option>Full-Time Role / Collaboration</option>
                   </select>
                 </div>
 

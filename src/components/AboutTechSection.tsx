@@ -83,7 +83,7 @@ export const AboutTechSection: React.FC<AboutTechSectionProps> = ({
               transition={{ duration: 0.6 }}
               className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-neutral-950 leading-[1.08] font-display max-w-2xl mb-12"
             >
-              Building practical software with clean structure, reliable code, and genuine utility.
+              Building practical software and applied AI systems with clean structure, reliable code, and genuine utility.
             </motion.h2>
 
             {/* Middle Row: Photo (Left) and Grounded Bio Paragraphs (Right) */}
@@ -106,10 +106,10 @@ export const AboutTechSection: React.FC<AboutTechSectionProps> = ({
                   I&apos;m <strong className="font-bold text-neutral-950">Clint Jay Estrellanes</strong>, an Information Technology senior at Negros Oriental State University and a DOST-SEI scholar based in Dumaguete City.
                 </p>
                 <p>
-                  My focus is on full-stack web development, software engineering fundamentals, and practical application security. Most of my day-to-day work involves building tools with TypeScript, React, Next.js, Python, and Docker.
+                  I am deeply passionate about <strong className="font-semibold text-neutral-900">AI engineering</strong> and the intersection between dependable software architecture and applied intelligence. Rather than treating AI as a superficial novelty, I focus on engineering practical, end-to-end systems—integrating Retrieval-Augmented Generation (RAG), vector search, and agentic workflows into production-ready platforms built with Python, TypeScript, React, Next.js, and Docker.
                 </p>
                 <p>
-                  I enjoy solving everyday operational problems through software—whether developing student platforms during my internship, collaborating on our startup project TaskBuddy, or exploring cyber defense in team competitions. I value simplicity, maintainability, and learning how systems work from the ground up.
+                  My work spans developing context-aware assistants like NorsuAsk (FAISS-powered RAG), intelligent multi-modal schedulers like BunZ (OCR + LLM pipelines), and completing specialized KOICA training in deep learning, LLM fine-tuning, and agent orchestration. Whether collaborating on our startup TaskBuddy or engineering internal systems at the MIS office, I build with a clear compass: clean structure, deterministic execution, and real-world utility over hype.
                 </p>
               </div>
             </div>
@@ -188,7 +188,7 @@ export const AboutTechSection: React.FC<AboutTechSectionProps> = ({
                   </span>
                   <div className="space-y-0.5">
                     <h4 className="font-bold text-neutral-950 leading-tight">Big Data & AI Training</h4>
-                    <p className="text-neutral-600 text-[11px]">Hannam University / KOICA</p>
+                    <p className="text-neutral-600 text-[11px]">Silliman University - Hannam University / KOICA</p>
                     <p className="text-neutral-500 text-[11px]">120-hour specialized program</p>
                   </div>
                 </div>
@@ -208,7 +208,7 @@ export const AboutTechSection: React.FC<AboutTechSectionProps> = ({
                     2026 -<br />TODAY
                   </span>
                   <div className="space-y-0.5">
-                    <h4 className="font-bold text-neutral-950 leading-tight">Software Engineering Intern</h4>
+                    <h4 className="font-bold text-neutral-950 leading-tight">Full Stack Developer Intern</h4>
                     <p className="text-neutral-600 text-[11px]">NORSU MIS & EDP Unit</p>
                     <p className="text-neutral-500 text-[11px]">Internal web tools (React, TypeScript, Laravel)</p>
                   </div>
