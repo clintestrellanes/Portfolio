@@ -18,7 +18,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
-  const categories = ['All', 'Web App', 'Design System', 'Interactive 3D', 'AI / Data'];
+  const categories = ['All', 'Solo Projects', 'Web App', 'AI / Data'];
 
   // Filter projects based on category or selected tech tag from Section 2
   const filteredProjects = useMemo(() => {
@@ -36,8 +36,21 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       }
 
       // Category filter
-      if (selectedCategory !== 'All' && project.category !== selectedCategory) {
-        return false;
+      if (selectedCategory !== 'All') {
+        if (selectedCategory === 'Solo Projects' || selectedCategory === 'Solo Project') {
+          const isSolo =
+            project.isSolo === true ||
+            project.category === 'Solo Project' ||
+            project.tags.some((t) => t.toLowerCase() === 'solo project' || t.toLowerCase() === 'solo');
+          if (!isSolo) return false;
+        } else if (selectedCategory === 'Web App') {
+          const isWeb =
+            project.category === 'Web App' ||
+            project.id === 'toothalie-clinic-suite';
+          if (!isWeb) return false;
+        } else if (project.category !== selectedCategory) {
+          return false;
+        }
       }
 
       return true;
@@ -134,8 +147,57 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                   delay: Math.min(idx * 0.06, 0.3),
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="group flex flex-col bg-white rounded-3xl p-5 border border-neutral-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_36px_rgba(0,0,0,0.08)] hover:border-neutral-300 transition-[box-shadow,border-color] duration-300"
+                className="group relative flex flex-col bg-white rounded-3xl p-5 border border-neutral-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_36px_rgba(0,0,0,0.08)] hover:border-neutral-300 transition-[box-shadow,border-color] duration-300"
               >
+                {/* V-Shape Flag Banner for Solo Projects */}
+                {project.isSolo && (
+                  <div
+                    className="absolute top-0 right-6 z-20 pointer-events-none transition-transform duration-300 group-hover:-translate-y-0.5"
+                    style={{ filter: 'drop-shadow(0 4px 8px rgba(20,50,20,0.28))' }}
+                    title="Solo Project"
+                  >
+                    {/* Mounting bracket / pole */}
+                    <div
+                      className="w-[32px] h-[3px] rounded-full mx-auto relative z-10 -mb-[1px]"
+                      style={{
+                        background: 'linear-gradient(180deg, #4a4a52, #2b2b2f)',
+                        boxShadow: '0 1px 2px rgba(0,0,0,0.25)',
+                      }}
+                    />
+
+                    {/* The V-Shape Flag */}
+                    <div
+                      className="relative w-[28px] h-[60px] flex flex-col items-center overflow-hidden"
+                      style={{
+                        background:
+                          'linear-gradient(115deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0) 30%), linear-gradient(160deg, #37b24d 0%, #2f9e44 55%, #1f7a34 100%)',
+                        clipPath: 'polygon(0 0, 100% 0, 100% 74%, 50% 100%, 0 74%)',
+                      }}
+                    >
+                      {/* Subtle fabric weave texture */}
+                      <div
+                        className="absolute inset-0 opacity-25 pointer-events-none"
+                        style={{
+                          background:
+                            'repeating-linear-gradient(100deg, rgba(255,255,255,0.18) 0 3px, rgba(0,0,0,0.12) 3px 6px)',
+                          mixBlendMode: 'overlay',
+                        }}
+                      />
+
+                      {/* The word SOLO fitting vertically */}
+                      <div
+                        className="relative z-10 flex flex-col items-center justify-center pt-2 gap-[2px] text-[#fbf3df] font-black text-[9.5px] font-mono tracking-widest select-none leading-none"
+                        style={{ textShadow: '0 1px 2px rgba(0,0,0,0.45)' }}
+                      >
+                        <span>S</span>
+                        <span>O</span>
+                        <span>L</span>
+                        <span>O</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 {/* 1. Loop Video Preview of Navigating the Project */}
                 <div className="w-full mb-4">
                   <ProjectVideoPreview
@@ -169,24 +231,24 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
 
                   {/* 4. Tags on the Body / Description Area */}
                   <div className="pt-4 border-t border-neutral-100 mt-auto">
-                    
-
                     <div className="flex flex-wrap gap-1.5 mb-5">
-                      {project.tags.map((tag) => {
-                        const isOnHold = tag.toLowerCase() === 'on hold';
-                        return (
-                          <span
-                            key={tag}
-                            className={`text-[11px] font-mono px-2.5 py-1 rounded-md border transition-colors ${
-                              isOnHold
-                                ? 'bg-amber-50 text-amber-800 border-amber-300 font-semibold'
-                                : 'bg-neutral-100 text-neutral-800 border-neutral-200/80 hover:bg-neutral-200/80'
-                            }`}
-                          >
-                            #{tag}
-                          </span>
-                        );
-                      })}
+                      {project.tags
+                        .filter((tag) => tag.toLowerCase() !== 'solo project')
+                        .map((tag) => {
+                          const isOnHold = tag.toLowerCase() === 'on hold';
+                          return (
+                            <span
+                              key={tag}
+                              className={`text-[11px] font-mono px-2.5 py-1 rounded-md border transition-colors ${
+                                isOnHold
+                                  ? 'bg-amber-50 text-amber-800 border-amber-300 font-semibold'
+                                  : 'bg-neutral-100 text-neutral-800 border-neutral-200/80 hover:bg-neutral-200/80'
+                              }`}
+                            >
+                              #{tag}
+                            </span>
+                          );
+                        })}
                     </div>
 
                     {/* Card Footer Actions */}

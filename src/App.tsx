@@ -4,7 +4,6 @@ import { HeroSection } from './components/HeroSection';
 import { AboutTechSection } from './components/AboutTechSection';
 import { ProjectsSection } from './components/ProjectsSection';
 import { ProjectModal } from './components/ProjectModal';
-import { ConnectModal } from './components/ConnectModal';
 import { Footer } from './components/Footer';
 import { Project } from './data/projectsData';
 import { TechItem } from './components/TechLogos';
@@ -12,7 +11,6 @@ import { TechItem } from './components/TechLogos';
 export default function App() {
   const [activeSection, setActiveSection] = useState<'hero' | 'about' | 'projects'>('hero');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [isConnectOpen, setIsConnectOpen] = useState(false);
   const [selectedTechFilter, setSelectedTechFilter] = useState<TechItem | null>(null);
 
   // Scrollspy to update active section in navbar
@@ -63,10 +61,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#FAFAFA] text-[#111111] flex flex-col font-sans selection:bg-neutral-900 selection:text-white">
       {/* Top Navbar */}
-      <Navbar
-        onOpenConnect={() => setIsConnectOpen(true)}
-        activeSection={activeSection}
-      />
+      <Navbar activeSection={activeSection} />
 
       <main className="flex-1 w-full">
         {/* SECTION 1: Welcome SplitText animation -> transition to Portfolio + ShinyText Name + 2026 */}
@@ -74,7 +69,6 @@ export default function App() {
 
         {/* SECTION 2: Image 2 verbatim left side + "Lets Connect!" CTA + InfiniteSpiral of tech stack logos */}
         <AboutTechSection
-          onOpenConnect={() => setIsConnectOpen(true)}
           onSelectTechForFilter={handleSelectTech}
           selectedTechId={selectedTechFilter?.id}
         />
@@ -94,12 +88,6 @@ export default function App() {
       <ProjectModal
         project={selectedProject}
         onClose={() => setSelectedProject(null)}
-      />
-
-      {/* Let's Connect Dialog */}
-      <ConnectModal
-        isOpen={isConnectOpen}
-        onClose={() => setIsConnectOpen(false)}
       />
     </div>
   );

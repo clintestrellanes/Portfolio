@@ -104,21 +104,23 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                     Technologies
                   </span>
                   <div className="flex flex-wrap gap-1.5">
-                    {project.tags.map((tag) => {
-                      const isOnHold = tag.toLowerCase() === 'on hold';
-                      return (
-                        <span
-                          key={tag}
-                          className={`px-2.5 py-1 rounded-md border font-mono ${
-                            isOnHold
-                              ? 'bg-amber-50 text-amber-800 border-amber-300 font-semibold'
-                              : 'bg-white border-neutral-200 text-neutral-800'
-                          }`}
-                        >
-                          #{tag}
-                        </span>
-                      );
-                    })}
+                    {project.tags
+                      .filter((tag) => tag.toLowerCase() !== 'solo project')
+                      .map((tag) => {
+                        const isOnHold = tag.toLowerCase() === 'on hold';
+                        return (
+                          <span
+                            key={tag}
+                            className={`px-2.5 py-1 rounded-md border font-mono ${
+                              isOnHold
+                                ? 'bg-amber-50 text-amber-800 border-amber-300 font-semibold'
+                                : 'bg-white border-neutral-200 text-neutral-800'
+                            }`}
+                          >
+                            #{tag}
+                          </span>
+                        );
+                      })}
                   </div>
                 </div>
 

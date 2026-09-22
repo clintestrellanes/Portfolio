@@ -3,11 +3,10 @@ import { ShinyText } from './ShinyText';
 import { Sparkles } from 'lucide-react';
 
 interface NavbarProps {
-  onOpenConnect: () => void;
   activeSection: string;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenConnect, activeSection }) => {
+export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {

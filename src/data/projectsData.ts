@@ -2,12 +2,15 @@ import toothalieVideo from '../assets/videos/Toothalie.mp4';
 import smsVideo from '../assets/videos/SMS.mp4';
 import nielVideo from '../assets/videos/NIEL.mp4';
 import norsuSurfersVideo from '../assets/videos/NorsuSurfers.mp4';
+import norsuSurfersPoster from '../assets/images/norsu-surfers-poster.png';
 import taskbuddyPoster from '../assets/images/TaskBuddy Pitch Deck.png';
+
 export interface Project {
   id: string;
   title: string;
   subtitle: string;
-  category: 'Web App' | 'Design System' | 'Interactive 3D' | 'AI / Data';
+  category: 'Web App' | 'Solo Project' | 'AI / Data' | 'Game' | 'Design System' | 'Interactive 3D';
+  isSolo?: boolean;
   year: string;
   shortDescription: string;
   fullDescription: string;
@@ -26,7 +29,8 @@ export const PROJECTS_DATA: Project[] = [
     id: 'toothalie-clinic-suite',
     title: 'Toothalie Dental Clinic System',
     subtitle: 'Full-cycle clinic management with live queueing & push sync',
-    category: 'Design System',
+    category: 'Solo Project',
+    isSolo: true,
     year: '2025',
     shortDescription:
       'End-to-end dental clinic management system featuring real-time appointment booking, doctor queues, and cross-platform push notifications via WebSockets and Firebase.',
@@ -34,7 +38,7 @@ export const PROJECTS_DATA: Project[] = [
       'Architected cross-platform clinic operations with React web management and React Native mobile clients, powered by Symfony API backend, real-time doctor queue streaming, and automated SMS appointment reminders.',
     videoUrl: toothalieVideo,
     fallbackPoster: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80',
-    tags: ['React', 'React Native', 'Symfony', 'WebSockets', 'Firebase', 'MySQL'],
+    tags: ['Solo Project', 'React', 'React Native', 'Symfony', 'WebSockets', 'Firebase', 'MySQL'],
     techStack: ['react', 'jsx', 'mysql', 'docker', 'git', 'github'],
     liveUrl: 'https://github.com/clintestrellanes/toothalie',
     githubUrl: 'https://github.com/clintestrellanes/toothalie',
@@ -107,19 +111,20 @@ export const PROJECTS_DATA: Project[] = [
     id: 'norsu-surfers',
     title: 'NORSU Surfers — Retro Arcade Web Game',
     subtitle: 'Exhibited retro arcade runner built for the CASICAS 2024 Game Showcase',
-    category: 'Web App',
+    category: 'Solo Project',
+    isSolo: true,
     year: '2024',
     shortDescription:
       'Retro arcade browser game developed and exhibited for the 2024 CASICAS Game Showcase, featuring CRT aesthetics, multi-lane obstacle dodging, and university phrase-collection gameplay.',
     fullDescription:
       'Developed in 2024 upon invitation to showcase at the university event "CASICAS". Built using pure vanilla JavaScript (ES6+) and custom CSS CRT scanline shaders, the game features dynamic multi-velocity enemy spawning with road warning indicators, real-time AABB collision detection, active power-ups (Speed & Immunity), and a campus phrase-collection mechanic ("I LOVE NEGROS ORIENTAL STATE UNIVERSITY").',
     videoUrl: norsuSurfersVideo,
-    fallbackPoster: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80',
-    tags: ['JavaScript (ES6+)', 'Game Loop', 'CSS3 CRT Shaders', 'Arcade', 'AABB Collision', 'HTML5 Audio'],
+    fallbackPoster: norsuSurfersPoster,
+    tags: ['Solo Project', 'JavaScript (ES6+)', 'Game Loop', 'CSS3 CRT Shaders', 'Arcade', 'AABB Collision', 'HTML5 Audio'],
     techStack: ['git', 'github', 'vercel'],
     liveUrl: 'https://github.com/clintestrellanes/Norsu_Surfers',
     githubUrl: 'https://github.com/clintestrellanes/Norsu_Surfers',
-    metrics: 'Invited Exhibitor @ CASICAS 2024 • CRT Retro Engine',
+    metrics: 'Solo Project • Invited Exhibitor @ CASICAS 2024',
     features: [
       'Official game entry exhibited at the CASICAS 2024 showcase',
       'Dynamic multi-speed enemy spawning with lane warning indicators',

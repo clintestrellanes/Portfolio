@@ -2,12 +2,11 @@ import React, { useState, useMemo } from 'react';
 import { motion } from 'motion/react';
 import { InfiniteSpiral } from './InfiniteSpiral';
 import { TechItem, TECH_ITEMS, TechLogo, TechId } from './TechLogos';
-import { Mail, ArrowUpRight, Copy, Check, Sparkles } from 'lucide-react';
+import { Mail, ArrowUpRight, Copy, Check, Github, Linkedin, Facebook } from 'lucide-react';
 
 import me from '../assets/me.jpg';
 
 interface AboutTechSectionProps {
-  onOpenConnect: () => void;
   onSelectTechForFilter?: (tech: TechItem) => void;
   selectedTechId?: string | null;
 }
@@ -36,12 +35,11 @@ const getTechSvgDataUri = (id: TechId): string => {
 };
 
 export const AboutTechSection: React.FC<AboutTechSectionProps> = ({
-  onOpenConnect,
   onSelectTechForFilter,
   selectedTechId,
 }) => {
   const [copiedEmail, setCopiedEmail] = useState(false);
-  const email = 'clintestrellanes@gmail.com';
+  const email = 'clintjayestrellanes17@gmail.com';
 
   const handleCopyEmail = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -69,13 +67,11 @@ export const AboutTechSection: React.FC<AboutTechSectionProps> = ({
       className="relative w-full min-h-screen bg-white text-[#111111] px-6 sm:px-12 lg:px-16 py-20 border-t border-neutral-200/80 select-text"
     >
       <div className="max-w-7xl mx-auto">
-        {/* Main 2-Column Editorial Grid matching Image 2 */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
-          {/* LEFT COLUMN: Headline, Photo + Bio, Contact + Quote */}
+          {/* LEFT COLUMN: Headline, Photo + Bio, Contact + Socials */}
           <div className="lg:col-span-7 flex flex-col">
             
-            {/* Top Headline: Direct, purposeful, no buzzword inflation */}
             <motion.h2
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -86,7 +82,6 @@ export const AboutTechSection: React.FC<AboutTechSectionProps> = ({
               Building practical software and applied AI systems with clean structure, reliable code, and genuine utility.
             </motion.h2>
 
-            {/* Middle Row: Photo (Left) and Grounded Bio Paragraphs (Right) */}
             <div className="grid grid-cols-1 sm:grid-cols-12 gap-8 items-start">
               {/* Photo */}
               <div className="sm:col-span-5">
@@ -100,7 +95,7 @@ export const AboutTechSection: React.FC<AboutTechSectionProps> = ({
                 </div>
               </div>
 
-              {/* Bio Paragraphs: Modest, informative, focused on learning & building */}
+              {/* Bio Paragraphs */}
               <div className="sm:col-span-7 space-y-4 text-xs sm:text-[13px] leading-relaxed text-neutral-700">
                 <p>
                   I&apos;m <strong className="font-bold text-neutral-950">Clint Jay Estrellanes</strong>, an Information Technology senior at Negros Oriental State University and a DOST-SEI scholar based in Dumaguete City.
@@ -114,14 +109,16 @@ export const AboutTechSection: React.FC<AboutTechSectionProps> = ({
               </div>
             </div>
 
-            {/* Bottom Row: Contact (under photo) + Grounded Quote (under bio) */}
+            {/* Bottom Row: Direct Contact & Social Links (under photo) + Quote (under bio) */}
             <div className="grid grid-cols-1 sm:grid-cols-12 gap-8 items-start mt-10 pt-4">
-              {/* Contact Block */}
+              
+              {/* Contact & Social Links */}
               <div className="sm:col-span-5 space-y-3">
                 <span className="block text-xs font-bold text-neutral-950 lowercase tracking-tight">
-                  contact
+                  contact & profiles
                 </span>
                 
+                {/* Email Address */}
                 <div className="flex items-center gap-2">
                   <Mail className="w-3.5 h-3.5 text-neutral-900 shrink-0" />
                   <a
@@ -139,15 +136,46 @@ export const AboutTechSection: React.FC<AboutTechSectionProps> = ({
                   </button>
                 </div>
 
-                <div className="pt-2">
-                  <button
-                    onClick={onOpenConnect}
-                    className="inline-flex items-center gap-2 text-xs font-semibold text-neutral-900 hover:text-neutral-600 transition-colors"
+                {/* Social Profiles */}
+                <div className="pt-2 flex flex-col gap-2">
+                  <a
+                    href="https://github.com/clintestrellanes"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center justify-between text-xs text-neutral-700 hover:text-neutral-950 transition-colors"
                   >
-                    <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                    <span>Let&apos;s Connect</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </button>
+                    <span className="flex items-center gap-2">
+                      <Github className="w-3.5 h-3.5 text-neutral-900 shrink-0" />
+                      <span>GitHub</span>
+                    </span>
+                    <ArrowUpRight className="w-3 h-3 text-neutral-400 group-hover:text-neutral-950 transition-colors" />
+                  </a>
+
+                  <a
+                    href="https://www.linkedin.com/in/clint-jay-estrellanes-564957282/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center justify-between text-xs text-neutral-700 hover:text-neutral-950 transition-colors"
+                  >
+                    <span className="flex items-center gap-2">
+                      <Linkedin className="w-3.5 h-3.5 text-neutral-900 shrink-0" />
+                      <span>LinkedIn</span>
+                    </span>
+                    <ArrowUpRight className="w-3 h-3 text-neutral-400 group-hover:text-neutral-950 transition-colors" />
+                  </a>
+
+                  <a
+                    href="https://www.facebook.com/clintjay.estrellanes.7/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center justify-between text-xs text-neutral-700 hover:text-neutral-950 transition-colors"
+                  >
+                    <span className="flex items-center gap-2">
+                      <Facebook className="w-3.5 h-3.5 text-neutral-900 shrink-0" />
+                      <span>Facebook</span>
+                    </span>
+                    <ArrowUpRight className="w-3 h-3 text-neutral-400 group-hover:text-neutral-950 transition-colors" />
+                  </a>
                 </div>
               </div>
 
@@ -202,7 +230,6 @@ export const AboutTechSection: React.FC<AboutTechSectionProps> = ({
               </h3>
 
               <div className="space-y-6">
-                {/* Role 1 */}
                 <div className="grid grid-cols-[95px_1fr] gap-x-4 items-start text-xs">
                   <span className="text-[10px] font-mono uppercase text-neutral-500 leading-tight pt-0.5">
                     2026 -<br />TODAY
@@ -214,7 +241,6 @@ export const AboutTechSection: React.FC<AboutTechSectionProps> = ({
                   </div>
                 </div>
 
-                {/* Role 2 */}
                 <div className="grid grid-cols-[95px_1fr] gap-x-4 items-start text-xs">
                   <span className="text-[10px] font-mono uppercase text-neutral-500 leading-tight pt-0.5">
                     2024 -<br />TODAY
@@ -226,7 +252,6 @@ export const AboutTechSection: React.FC<AboutTechSectionProps> = ({
                   </div>
                 </div>
 
-                {/* Role 3 */}
                 <div className="grid grid-cols-[95px_1fr] gap-x-4 items-start text-xs">
                   <span className="text-[10px] font-mono uppercase text-neutral-500 leading-tight pt-0.5">
                     2026
@@ -238,7 +263,6 @@ export const AboutTechSection: React.FC<AboutTechSectionProps> = ({
                   </div>
                 </div>
 
-                {/* Role 4 */}
                 <div className="grid grid-cols-[95px_1fr] gap-x-4 items-start text-xs">
                   <span className="text-[10px] font-mono uppercase text-neutral-500 leading-tight pt-0.5">
                     2026
@@ -263,7 +287,6 @@ export const AboutTechSection: React.FC<AboutTechSectionProps> = ({
                 </span>
               </div>
 
-              {/* Clean borderless canvas with floating 3D logos */}
               <div className="w-full relative h-[320px] flex items-center justify-center bg-transparent overflow-hidden">
                 <InfiniteSpiral
                   items={spiralItems}
