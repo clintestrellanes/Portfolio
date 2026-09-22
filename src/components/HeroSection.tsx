@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { SplitText } from './SplitText';
 import { ShinyText } from './ShinyText';
-import formal from '../assets/formal.png';
+import formal from '../assets/formal.webp';
 
 interface HeroSectionProps {
   onScrollToNext: () => void;
@@ -17,8 +17,8 @@ const mainContainerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.04,
+      staggerChildren: 0.07,
+      delayChildren: 0.08,
     },
   },
 };
@@ -48,13 +48,12 @@ const metaVariants = {
 };
 
 const portraitVariants = {
-  hidden: { opacity: 0, x: 24, scale: 0.97 },
+  hidden: { opacity: 0, y: 18 },
   visible: {
     opacity: 1,
-    x: 0,
-    scale: 1,
+    y: 0,
     transition: {
-      duration: 1.0,
+      duration: 0.85,
       ease: TRANSITION_EASE,
     },
   },
@@ -92,13 +91,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToNext }) => {
           {phase === 'welcome' ? (
             <motion.div
               key={`welcome-${replayKey}`}
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1, transition: { duration: 0.5, ease: TRANSITION_EASE } }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, transition: { duration: 0.45, ease: TRANSITION_EASE } }}
               exit={{
                 opacity: 0,
-                y: -22,
-                scale: 0.98,
-                transition: { duration: 0.35, ease: EXIT_EASE },
+                y: -18,
+                transition: { duration: 0.3, ease: EXIT_EASE },
               }}
               className="flex flex-col items-center justify-center text-center py-20"
             >
@@ -123,17 +121,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToNext }) => {
               animate="visible"
               className="relative w-full flex items-center min-h-[400px] sm:min-h-[480px] md:min-h-[540px] py-8 sm:py-12"
             >
-              {/* Background Portrait: Smoothly fades and glides in */}
-              <motion.div
-                variants={portraitVariants}
-                className="absolute right-[-10%] sm:right-[-4%] md:right-0 bottom-0 md:bottom-auto md:top-1/2 md:-translate-y-1/2 w-56 sm:w-72 md:w-[380px] lg:w-[460px] xl:w-[500px] pointer-events-none select-none z-0 flex justify-end opacity-35 sm:opacity-65 md:opacity-95"
-              >
-                <img
-                  src={formal}
-                  alt="Clint Jay C. Estrellanes"
-                  className="w-full h-auto max-h-[60vh] sm:max-h-[70vh] md:max-h-[85vh] object-contain object-bottom md:object-right"
-                />
-              </motion.div>
+              {/* Background Portrait: Layout container decoupled from motion transform */}
+              <div className="absolute right-[-10%] sm:right-[-4%] md:right-0 bottom-0 md:bottom-auto md:top-1/2 md:-translate-y-1/2 w-56 sm:w-72 md:w-[380px] lg:w-[460px] xl:w-[500px] pointer-events-none select-none z-0 flex justify-end">
+                <motion.div
+                  variants={portraitVariants}
+                  className="w-full flex justify-end will-change-[transform,opacity]"
+                >
+                  <img
+                    src={formal}
+                    alt="Clint Jay C. Estrellanes"
+                    decoding="async"
+                    fetchPriority="high"
+                    className="w-full h-auto max-h-[60vh] sm:max-h-[70vh] md:max-h-[85vh] object-contain object-bottom md:object-right opacity-35 sm:opacity-65 md:opacity-95"
+                  />
+                </motion.div>
+              </div>
 
               {/* Foreground Layer: Staggered Heading, Name, and Year */}
               <div className="relative z-10 flex flex-col items-start text-left max-w-full md:max-w-2xl lg:max-w-3xl">

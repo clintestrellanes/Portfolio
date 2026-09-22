@@ -37,28 +37,39 @@ export const ProjectVideoPreview: React.FC<ProjectVideoPreviewProps> = ({
 
   return (
     <div
-      className="relative w-full aspect-[16/10] bg-neutral-950 overflow-hidden rounded-2xl group border border-neutral-800/80 shadow-md cursor-pointer"
+      className="relative w-full aspect-[16/10] bg-neutral-100 overflow-hidden rounded-2xl group border border-neutral-200/80 shadow-sm cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={onOpenModal}
     >
       {/* Showcase Media: Either Video Only or Image Only */}
       {hasVideo ? (
-        <video
-          ref={videoRef}
-          src={videoUrl}
-          poster={posterUrl}
-          autoPlay
-          loop
-          muted
-          playsInline
-          onError={() => setVideoError(true)}
-          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-        />
+        <div className="relative w-full h-full">
+          {/* Immediate poster layer beneath video to eliminate flash before video decode */}
+          <img
+            src={posterUrl}
+            alt={title}
+            loading="eager"
+            referrerPolicy="no-referrer"
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          />
+          <video
+            ref={videoRef}
+            src={videoUrl}
+            poster={posterUrl}
+            autoPlay
+            loop
+            muted
+            playsInline
+            onError={() => setVideoError(true)}
+            className="relative z-10 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          />
+        </div>
       ) : (
         <img
           src={posterUrl}
           alt={title}
+          loading="eager"
           referrerPolicy="no-referrer"
           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />

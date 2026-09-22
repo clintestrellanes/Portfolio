@@ -126,11 +126,15 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             {filteredProjects.map((project, idx) => (
               <motion.article
                 key={project.id}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="group flex flex-col bg-white rounded-3xl p-5 border border-neutral-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_36px_rgba(0,0,0,0.08)] hover:border-neutral-300 transition-all duration-300"
+                viewport={{ once: true, amount: 0.05 }}
+                transition={{
+                  duration: 0.45,
+                  delay: Math.min(idx * 0.06, 0.3),
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="group flex flex-col bg-white rounded-3xl p-5 border border-neutral-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_36px_rgba(0,0,0,0.08)] hover:border-neutral-300 transition-[box-shadow,border-color] duration-300"
               >
                 {/* 1. Loop Video Preview of Navigating the Project */}
                 <div className="w-full mb-4">
