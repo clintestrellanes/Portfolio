@@ -1,7 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { motion } from 'motion/react';
-import { Project, PROJECTS_DATA } from '../data/projectsData';
+import { Project, PROJECTS_DATA, getRoleBadgeStyle } from '../data/projectsData';
 import { ProjectVideoPreview } from './ProjectVideoPreview';
+import { GhostBullet } from './GhostBullet';
 import { ExternalLink, Github, Filter, X, ArrowUpRight, Sparkles } from 'lucide-react';
 import { TechItem } from './TechLogos';
 
@@ -26,7 +27,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       // Tech filter from Section 2 InfiniteSpiral
       if (selectedTechFilter) {
         const matchesTech =
-          project.techStack.includes(selectedTechFilter.id) ||
+          (project.techStack as string[]).includes(selectedTechFilter.id) ||
           project.tags.some(
             (t) =>
               t.toLowerCase().includes(selectedTechFilter.id.toLowerCase()) ||
@@ -60,31 +61,31 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
   return (
     <section
       id="projects"
-      className="relative w-full min-h-screen bg-[#FAFAFA] text-[#111111] px-6 sm:px-12 lg:px-16 py-20 border-t border-neutral-200/80"
+      className="relative w-full min-h-screen bg-[#FAFAFA] text-[#111111] px-4 sm:px-8 md:px-12 lg:px-16 py-16 sm:py-20 border-t border-neutral-200/80"
     >
       <div className="max-w-7xl mx-auto">
 
         {/* Section Title & Filter Controls */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-12">
           <div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-neutral-950 font-display">
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-neutral-950 font-display">
               Projects.
             </h2>
-            <p className="mt-2 text-sm sm:text-base text-neutral-600 max-w-xl">
+            <p className="mt-2 text-xs sm:text-sm md:text-base text-neutral-600 max-w-xl">
               Each showcase features a continuous looping capture navigating the active interface,
               followed by architectural notes and stack composition.
             </p>
           </div>
 
           {/* Category Filter Pills */}
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
+                className={`px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
                   selectedCategory === cat
-                    ? 'bg-neutral-950 text-white shadow-sm'
+                    ? 'bg-neutral-950 text-white shadow-xs'
                     : 'bg-white text-neutral-700 border border-neutral-200 hover:border-neutral-400'
                 }`}
               >
@@ -99,10 +100,10 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-8 p-3.5 px-4 rounded-2xl bg-neutral-900 text-white flex items-center justify-between shadow-lg"
+            className="mb-8 p-3 sm:p-3.5 px-3.5 sm:px-4 rounded-xl sm:rounded-2xl bg-neutral-900 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-0 shadow-lg"
           >
             <div className="flex items-center gap-2.5 text-xs">
-              <Sparkles className="w-4 h-4 text-amber-300" />
+              <Sparkles className="w-4 h-4 text-amber-300 shrink-0" />
               <span>
                 Filtered by tech stack from 3D Spiral:{' '}
                 <strong className="underline underline-offset-4 decoration-amber-400 font-bold">
@@ -112,7 +113,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             </div>
             <button
               onClick={onClearTechFilter}
-              className="flex items-center gap-1 text-xs font-mono text-neutral-300 hover:text-white px-2 py-1 rounded bg-neutral-800 hover:bg-neutral-700 transition-colors"
+              className="flex items-center gap-1 text-xs font-mono text-neutral-300 hover:text-white px-2 py-1 rounded bg-neutral-800 hover:bg-neutral-700 transition-colors self-start sm:self-auto"
             >
               <span>Reset filter</span>
               <X className="w-3.5 h-3.5" />
@@ -120,9 +121,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
           </motion.div>
         )}
 
-        {/* 3-COLUMN PROJECT CARDS GRID (as requested in prompt) */}
+        {/* 3-COLUMN PROJECT CARDS GRID */}
         {filteredProjects.length === 0 ? (
-          <div className="w-full py-20 text-center bg-white rounded-3xl border border-dashed border-neutral-300">
+          <div className="w-full py-16 sm:py-20 text-center bg-white rounded-2xl sm:rounded-3xl border border-dashed border-neutral-300 px-4">
             <p className="text-neutral-500 text-sm">No projects found matching the active filters.</p>
             <button
               onClick={() => {
@@ -135,7 +136,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {filteredProjects.map((project, idx) => (
               <motion.article
                 key={project.id}
@@ -147,7 +148,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                   delay: Math.min(idx * 0.06, 0.3),
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="group relative flex flex-col bg-white rounded-3xl p-5 border border-neutral-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_36px_rgba(0,0,0,0.08)] hover:border-neutral-300 transition-[box-shadow,border-color] duration-300"
+                className="group relative flex flex-col bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-5 border border-neutral-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_36px_rgba(0,0,0,0.08)] hover:border-neutral-300 transition-[box-shadow,border-color] duration-300"
               >
                 {/* V-Shape Flag Banner for Solo Projects */}
                 {project.isSolo && (
@@ -211,11 +212,22 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
 
                 {/* 2. Project Title, Subtitle, & Year */}
                 <div className="flex-1 flex flex-col">
-                  <div className="flex items-baseline justify-between gap-2 mb-1.5">
-                    <h3 className="text-lg font-bold text-neutral-950 tracking-tight group-hover:text-black transition-colors">
-                      {project.title}
+                  <div className="flex items-start justify-between gap-2 mb-2">
+                    <h3 className="text-base sm:text-lg font-bold text-neutral-950 tracking-tight group-hover:text-black transition-colors flex flex-wrap items-center gap-x-2 gap-y-1.5 leading-snug">
+                      <span>{project.title}</span>
+                      {project.role && (() => {
+                        const style = getRoleBadgeStyle(project.role);
+                        return (
+                          <span
+                            className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold text-black ${style.border}`}
+                          >
+                            <GhostBullet size={16} />
+                            <span className="text-black">{project.role}</span>
+                          </span>
+                        );
+                      })()}
                     </h3>
-                    <span className="text-xs font-mono text-neutral-400 flex-shrink-0">
+                    <span className="text-xs font-mono text-neutral-400 flex-shrink-0 pt-0.5">
                       {project.year}
                     </span>
                   </div>

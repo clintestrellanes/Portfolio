@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { SplitText } from './SplitText';
 import { ShinyText } from './ShinyText';
-import formal from '../assets/formal.webp';
 
 interface HeroSectionProps {
   onScrollToNext: () => void;
@@ -17,14 +16,14 @@ const mainContainerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.07,
-      delayChildren: 0.08,
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
     },
   },
 };
 
 const titleVariants = {
-  hidden: { opacity: 0, y: 35 },
+  hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
@@ -36,24 +35,12 @@ const titleVariants = {
 };
 
 const metaVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.7,
-      ease: TRANSITION_EASE,
-    },
-  },
-};
-
-const portraitVariants = {
   hidden: { opacity: 0, y: 18 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.85,
+      duration: 0.7,
       ease: TRANSITION_EASE,
     },
   },
@@ -77,16 +64,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToNext }) => {
   return (
     <section
       id="hero"
-      className="relative w-full min-h-screen flex flex-col items-center justify-center bg-[#FAFAFA] text-[#111111] px-4 sm:px-8 md:px-12 lg:px-16 py-12 sm:py-16 overflow-hidden select-none"
+      className="relative w-full min-h-[100dvh] flex flex-col items-center justify-center bg-[#FAFAFA] text-[#111111] px-4 sm:px-8 md:px-12 lg:px-16 py-12 sm:py-16 overflow-hidden select-none"
     >
-      {/* Subtle architectural background guides */}
-      <div className="absolute inset-0 pointer-events-none flex justify-between px-6 sm:px-12 lg:px-16 opacity-30">
-        <div className="w-px h-full bg-neutral-200" />
-        <div className="w-px h-full bg-neutral-200 hidden md:block" />
-        <div className="w-px h-full bg-neutral-200" />
-      </div>
-
-      <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col justify-center min-h-[420px] sm:min-h-[500px]">
+      <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col items-center justify-center min-h-[380px] sm:min-h-[460px] md:min-h-[520px]">
         <AnimatePresence mode="wait">
           {phase === 'welcome' ? (
             <motion.div
@@ -98,12 +78,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToNext }) => {
                 y: -18,
                 transition: { duration: 0.3, ease: EXIT_EASE },
               }}
-              className="flex flex-col items-center justify-center text-center py-20"
+              className="flex flex-col items-center justify-center text-center py-12 sm:py-20 w-full"
             >
               <SplitText
                 key={`split-welcome-${replayKey}`}
                 text="Welcome"
-                className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter text-neutral-950 font-display"
+                className="text-4xl xs:text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter text-neutral-950 font-display text-center"
                 delay={45}
                 duration={0.5}
                 threshold={0}
@@ -119,36 +99,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToNext }) => {
               variants={mainContainerVariants}
               initial="hidden"
               animate="visible"
-              className="relative w-full flex items-center min-h-[400px] sm:min-h-[480px] md:min-h-[540px] py-8 sm:py-12"
+              className="relative w-full flex flex-col items-center justify-center text-center py-8 sm:py-12"
             >
-              {/* Background Portrait: Layout container decoupled from motion transform */}
-              <div className="absolute right-[-10%] sm:right-[-4%] md:right-0 bottom-0 md:bottom-auto md:top-1/2 md:-translate-y-1/2 w-56 sm:w-72 md:w-[380px] lg:w-[460px] xl:w-[500px] pointer-events-none select-none z-0 flex justify-end">
-                <motion.div
-                  variants={portraitVariants}
-                  className="w-full flex justify-end will-change-[transform,opacity]"
-                >
-                  <img
-                    src={formal}
-                    alt="Clint Jay C. Estrellanes"
-                    decoding="async"
-                    fetchPriority="high"
-                    className="w-full h-auto max-h-[60vh] sm:max-h-[70vh] md:max-h-[85vh] object-contain object-bottom md:object-right opacity-35 sm:opacity-65 md:opacity-95"
-                  />
-                </motion.div>
-              </div>
-
-              {/* Foreground Layer: Staggered Heading, Name, and Year */}
-              <div className="relative z-10 flex flex-col items-start text-left max-w-full md:max-w-2xl lg:max-w-3xl">
+              <div className="relative z-10 flex flex-col items-center justify-center text-center max-w-full w-full">
                 <motion.h1
                   variants={titleVariants}
-                  className="text-5xl sm:text-7xl md:text-8xl lg:text-[130px] xl:text-[155px] font-extrabold tracking-tighter text-neutral-950 leading-[0.9] font-display"
+                  className="text-4xl xs:text-5xl sm:text-7xl md:text-8xl lg:text-[120px] xl:text-[145px] font-extrabold tracking-tighter text-neutral-950 leading-[0.9] font-display text-center break-normal"
                 >
                   Portfolio.
                 </motion.h1>
 
                 <motion.div
                   variants={metaVariants}
-                  className="mt-3 sm:mt-5 pt-1 flex flex-wrap items-center gap-2 sm:gap-3 text-left"
+                  className="mt-4 sm:mt-6 pt-1 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-center"
                 >
                   <ShinyText
                     text="Clint Jay C. Estrellanes"
@@ -156,10 +119,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToNext }) => {
                     color="#171717"
                     shineColor="#e4e4e7"
                     spread={120}
-                    className="text-neutral-950 text-base sm:text-xl md:text-2xl font-bold tracking-tight cursor-default"
+                    className="text-neutral-950 text-sm sm:text-lg md:text-2xl font-bold tracking-tight cursor-default"
                   />
                   <span className="text-neutral-300 font-mono select-none hidden sm:inline">•</span>
-                  <div className="text-base sm:text-xl md:text-2xl font-extrabold tracking-tight text-neutral-950 font-display">
+                  <div className="text-sm sm:text-lg md:text-2xl font-extrabold tracking-tight text-neutral-950 font-display">
                     2026
                   </div>
                 </motion.div>

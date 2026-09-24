@@ -1,6 +1,17 @@
 import React from 'react';
 
-export type TechId = 'vercel' | 'react' | 'jsx' | 'tsx' | 'python' | 'mysql' | 'docker' | 'git' | 'github';
+export type TechId =
+  | 'typescript'
+  | 'python'
+  | 'react'
+  | 'reactnative'
+  | 'fastapi'
+  | 'symfony'
+  | 'mysql'
+  | 'docker'
+  | 'firebase'
+  | 'git'
+  | 'github';
 
 export interface TechItem {
   id: TechId;
@@ -14,66 +25,84 @@ export interface TechItem {
 
 export const TECH_ITEMS: TechItem[] = [
   {
-    id: 'vercel',
-    name: 'Vercel',
-    category: 'Edge & Cloud Hosting',
-    color: '#000000',
-    bgLight: 'bg-neutral-100 text-neutral-900 border-neutral-300',
-    description: 'Serverless deployment, edge rendering, and CI/CD workflows',
+    id: 'typescript',
+    name: 'TypeScript',
+    category: 'Language',
+    color: '#3178C6',
+    bgLight: 'bg-blue-50 text-blue-900 border-blue-200',
+    description: 'Static type checking, interfaces, and scalable application architecture',
+    level: 'Advanced',
+  },
+  {
+    id: 'python',
+    name: 'Python',
+    category: 'Backend & Services',
+    color: '#3776AB',
+    bgLight: 'bg-amber-50 text-amber-900 border-amber-200',
+    description: 'Async API design, data processing, and backend automation',
+    level: 'Advanced',
+  },
+  {
+    id: 'fastapi',
+    name: 'FastAPI',
+    category: 'Backend Framework',
+    color: '#009688',
+    bgLight: 'bg-teal-50 text-teal-900 border-teal-200',
+    description: 'High-performance ASGI endpoints, Pydantic validation, and OpenAPI specs',
     level: 'Production Ready',
   },
   {
     id: 'react',
     name: 'React',
-    category: 'Frontend Library',
+    category: 'Web Frontend',
     color: '#087EA4',
     bgLight: 'bg-sky-50 text-sky-900 border-sky-200',
-    description: 'Component architecture, concurrent hooks, and modern state machines',
+    description: 'Component lifecycles, custom hooks, and declarative state handling',
     level: 'Advanced Specialist',
   },
   {
-    id: 'jsx',
-    name: 'JSX',
-    category: 'Component Syntax',
-    color: '#23272F',
+    id: 'reactnative',
+    name: 'React Native & Expo',
+    category: 'Mobile Development',
+    color: '#61DAFB',
     bgLight: 'bg-cyan-50 text-cyan-900 border-cyan-200',
-    description: 'Declarative UI markup, virtual DOM rendering, and design token binding',
-    level: 'Expert',
+    description: 'Cross-platform mobile apps, native device APIs, and responsive layouts',
+    level: 'Production Ready',
   },
   {
-    id: 'tsx',
-    name: 'TSX',
-    category: 'Typed Components',
-    color: '#3178C6',
-    bgLight: 'bg-blue-50 text-blue-900 border-blue-200',
-    description: 'Strict end-to-end type safety, generic props, and compile-time validation',
-    level: 'Expert',
-  },
-  {
-    id: 'python',
-    name: 'Python',
-    category: 'Backend & Data',
-    color: '#3776AB',
-    bgLight: 'bg-amber-50 text-amber-900 border-amber-200',
-    description: 'FastAPI, automated data pipelines, scripting, and AI model orchestration',
-    level: 'Advanced',
+    id: 'symfony',
+    name: 'Symfony',
+    category: 'Backend Framework',
+    color: '#000000',
+    bgLight: 'bg-neutral-100 text-neutral-900 border-neutral-300',
+    description: 'Enterprise PHP architecture, Doctrine ORM, and RESTful service layers',
+    level: 'Proficient',
   },
   {
     id: 'mysql',
     name: 'MySQL',
     category: 'Relational Database',
     color: '#00758F',
-    bgLight: 'bg-teal-50 text-teal-900 border-teal-200',
-    description: 'ACID transactional schemas, relational indexing, and performant query tuning',
+    bgLight: 'bg-cyan-50 text-cyan-900 border-cyan-200',
+    description: 'Relational schema design, transactions, indexing, and query optimization',
     level: 'Proficient',
+  },
+  {
+    id: 'firebase',
+    name: 'Firebase',
+    category: 'Cloud Services',
+    color: '#FFCA28',
+    bgLight: 'bg-yellow-50 text-yellow-900 border-yellow-200',
+    description: 'FCM push notifications, real-time sync, and authentication services',
+    level: 'Production Ready',
   },
   {
     id: 'docker',
     name: 'Docker',
-    category: 'Containerization',
+    category: 'DevOps & Containers',
     color: '#2496ED',
     bgLight: 'bg-blue-50 text-blue-900 border-blue-200',
-    description: 'Isolated multi-stage container builds, docker-compose, and reproducible envs',
+    description: 'Containerized environments, multi-stage builds, and compose orchestration',
     level: 'Production Ready',
   },
   {
@@ -82,16 +111,16 @@ export const TECH_ITEMS: TechItem[] = [
     category: 'Version Control',
     color: '#F05032',
     bgLight: 'bg-orange-50 text-orange-900 border-orange-200',
-    description: 'Distributed tree management, interactive rebasing, and branching hygiene',
+    description: 'Branch management, rebasing workflows, and version integrity',
     level: 'Expert',
   },
   {
     id: 'github',
     name: 'GitHub',
-    category: 'Collaborative Hub',
+    category: 'CI/CD & Collaboration',
     color: '#181717',
     bgLight: 'bg-neutral-100 text-neutral-900 border-neutral-300',
-    description: 'GitHub Actions, automated test suites, PR reviews, and open-source contribution',
+    description: 'PR workflows, GitHub Actions pipelines, and repository management',
     level: 'Daily Driver',
   },
 ];
@@ -104,7 +133,7 @@ interface TechLogoProps {
 
 export const TechLogo: React.FC<TechLogoProps> = ({ id, size = 32, className = '' }) => {
   switch (id) {
-    case 'vercel':
+    case 'typescript':
       return (
         <svg
           width={size}
@@ -114,7 +143,47 @@ export const TechLogo: React.FC<TechLogoProps> = ({ id, size = 32, className = '
           xmlns="http://www.w3.org/2000/svg"
           className={className}
         >
-          <path d="M12 2L22 20H2L12 2Z" fill="currentColor" />
+          <rect width="24" height="24" rx="3" fill="#3178C6" />
+          <path
+            d="M12.5 12.875V11.25H4.5V12.875H7.375V19.5H9.625V12.875H12.5ZM13.875 17.5C14.375 18.25 15.25 18.75 16.375 18.75C17.625 18.75 18.5 18.125 18.5 17.125C18.5 14.75 14.125 15.25 14.125 12.375C14.125 10.75 15.375 9.75 17.125 9.75C18.25 9.75 19.125 10.125 19.75 10.875L18.375 12.125C18 11.625 17.5 11.375 16.875 11.375C16 11.375 15.5 11.75 15.5 12.375C15.5 14.625 19.875 14.125 19.875 17C19.875 18.875 18.375 20.375 16.25 20.375C14.875 20.375 13.625 19.625 13 18.625L13.875 17.5Z"
+            fill="#FFFFFF"
+          />
+        </svg>
+      );
+
+    case 'python':
+      return (
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className={className}
+        >
+          <path
+            d="M11.91 2C8.38 2 8.6 3.53 8.6 3.53V5.13H12.03V5.64H5.16S2 5.28 2 8.81C2 12.35 4.76 12.18 4.76 12.18H6.41V9.82C6.41 7.23 8.55 7.28 8.55 7.28H11.95S15.19 7.35 15.19 4.12C15.2 2 11.91 2 11.91 2ZM9.95 3.12C10.42 3.12 10.8 3.5 10.8 3.97C10.8 4.44 10.42 4.82 9.95 4.82C9.48 4.82 9.1 4.44 9.1 3.97C9.1 3.5 9.48 3.12 9.95 3.12Z"
+            fill="#3776AB"
+          />
+          <path
+            d="M12.09 22C15.62 22 15.4 20.47 15.4 20.47V18.87H11.97V18.36H18.84S22 18.72 22 15.19C22 11.65 19.24 11.82 19.24 11.82H17.59V14.18C17.59 16.77 15.45 16.72 15.45 16.72H12.05S8.81 16.65 8.81 19.88C8.8 22 12.09 22 12.09 22ZM14.05 20.88C13.58 20.88 13.2 20.5 13.2 20.03C13.2 19.56 13.58 19.18 14.05 19.18C14.52 19.18 14.9 19.56 14.9 20.03C14.9 20.5 14.52 20.88 14.05 20.88Z"
+            fill="#FFD438"
+          />
+        </svg>
+      );
+
+    case 'fastapi':
+      return (
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className={className}
+        >
+          <circle cx="12" cy="12" r="10" fill="#009688" />
+          <path d="M12.8 5L7 13.5H12L11.2 19L17 10.5H12L12.8 5Z" fill="#FFFFFF" />
         </svg>
       );
 
@@ -137,29 +206,7 @@ export const TechLogo: React.FC<TechLogoProps> = ({ id, size = 32, className = '
         </svg>
       );
 
-    case 'jsx':
-      return (
-        <div
-          style={{ width: size, height: size }}
-          className={`flex flex-col items-center justify-center font-mono font-black text-cyan-600 rounded bg-cyan-100/70 border border-cyan-300 leading-none ${className}`}
-        >
-          <span className="text-[10px] tracking-tighter">&lt;/&gt;</span>
-          <span className="text-[9px] font-bold">JSX</span>
-        </div>
-      );
-
-    case 'tsx':
-      return (
-        <div
-          style={{ width: size, height: size }}
-          className={`flex flex-col items-center justify-center font-mono font-black text-blue-600 rounded bg-blue-100/70 border border-blue-300 leading-none ${className}`}
-        >
-          <span className="text-[10px] tracking-tighter">TS</span>
-          <span className="text-[9px] font-bold">TSX</span>
-        </div>
-      );
-
-    case 'python':
+    case 'reactnative':
       return (
         <svg
           width={size}
@@ -169,13 +216,63 @@ export const TechLogo: React.FC<TechLogoProps> = ({ id, size = 32, className = '
           xmlns="http://www.w3.org/2000/svg"
           className={className}
         >
-          <path
-            d="M11.91 2C8.38 2 8.6 3.53 8.6 3.53V5.13H12.03V5.64H5.16S2 5.28 2 8.81C2 12.35 4.76 12.18 4.76 12.18H6.41V9.82C6.41 7.23 8.55 7.28 8.55 7.28H11.95S15.19 7.35 15.19 4.12C15.2 2 11.91 2 11.91 2ZM9.95 3.12C10.42 3.12 10.8 3.5 10.8 3.97C10.8 4.44 10.42 4.82 9.95 4.82C9.48 4.82 9.1 4.44 9.1 3.97C9.1 3.5 9.48 3.12 9.95 3.12Z"
-            fill="#3776AB"
+          {/* Mobile Phone Chassis */}
+          <rect
+            x="4.5"
+            y="1.5"
+            width="15"
+            height="21"
+            rx="3"
+            fill="#0F172A"
+            stroke="#61DAFB"
+            strokeWidth="1.5"
           />
+          {/* Top Speaker Ear Piece */}
+          <line
+            x1="10"
+            y1="3.8"
+            x2="14"
+            y2="3.8"
+            stroke="#61DAFB"
+            strokeWidth="1"
+            strokeLinecap="round"
+            opacity="0.85"
+          />
+          {/* React Atom inside phone screen */}
+          <circle cx="12" cy="11.8" r="1.15" fill="#61DAFB" />
+          <g stroke="#61DAFB" strokeWidth="0.85" fill="none">
+            <ellipse cx="12" cy="11.8" rx="4.5" ry="1.7" />
+            <ellipse cx="12" cy="11.8" rx="4.5" ry="1.7" transform="rotate(60 12 11.8)" />
+            <ellipse cx="12" cy="11.8" rx="4.5" ry="1.7" transform="rotate(120 12 11.8)" />
+          </g>
+          {/* Bottom Home Indicator */}
+          <line
+            x1="9.5"
+            y1="19.8"
+            x2="14.5"
+            y2="19.8"
+            stroke="#61DAFB"
+            strokeWidth="1.2"
+            strokeLinecap="round"
+            opacity="0.85"
+          />
+        </svg>
+      );
+
+    case 'symfony':
+      return (
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className={className}
+        >
+          <circle cx="12" cy="12" r="10" fill="#000000" />
           <path
-            d="M12.09 22C15.62 22 15.4 20.47 15.4 20.47V18.87H11.97V18.36H18.84S22 18.72 22 15.19C22 11.65 19.24 11.82 19.24 11.82H17.59V14.18C17.59 16.77 15.45 16.72 15.45 16.72H12.05S8.81 16.65 8.81 19.88C8.8 22 12.09 22 12.09 22ZM14.05 20.88C13.58 20.88 13.2 20.5 13.2 20.03C13.2 19.56 13.58 19.18 14.05 19.18C14.52 19.18 14.9 19.56 14.9 20.03C14.9 20.5 14.52 20.88 14.05 20.88Z"
-            fill="#FFD438"
+            d="M14.6 8.5C13.8 7.8 12.5 7.6 11.3 7.9C9.4 8.4 8.2 10 8.4 11.7C8.6 13.3 9.9 14.3 11.5 14.6L12.3 14.8C13.4 15 14 15.6 13.9 16.4C13.8 17.3 12.8 17.8 11.6 17.6C10.5 17.4 9.7 16.7 9.4 15.9L7.8 16.6C8.3 18.2 9.7 19.3 11.4 19.5C13.6 19.8 15.3 18.6 15.5 16.6C15.7 14.7 14.5 13.7 12.8 13.4L12 13.2C11.1 13 10.3 12.6 10.2 11.8C10.1 11.1 10.7 10.4 11.7 10.2C12.6 10 13.3 10.3 13.8 10.8L14.6 8.5Z"
+            fill="#FFFFFF"
           />
         </svg>
       );
@@ -201,6 +298,35 @@ export const TechLogo: React.FC<TechLogoProps> = ({ id, size = 32, className = '
           <path
             d="M19.5 14.5C19.5 15.88 16.14 17 12 17C7.86 17 4.5 15.88 4.5 14.5V17C4.5 18.38 7.86 19.5 12 19.5C16.14 19.5 19.5 18.38 19.5 17V14.5Z"
             fill="#F29111"
+          />
+        </svg>
+      );
+
+    case 'firebase':
+      return (
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className={className}
+        >
+          <path
+            d="M4.6 15.2L7.2 2.8C7.3 2.3 7.9 2.1 8.2 2.5L11.2 8.1L4.6 15.2Z"
+            fill="#FFA000"
+          />
+          <path
+            d="M13.2 8.9L11.9 6.2C11.7 5.8 11.1 5.8 10.9 6.2L4.6 15.2L13.2 8.9Z"
+            fill="#F57C00"
+          />
+          <path
+            d="M16.1 4.5C16.4 4.0 17.1 4.1 17.2 4.6L19.4 15.2L4.6 15.2L16.1 4.5Z"
+            fill="#FFCA28"
+          />
+          <path
+            d="M4.6 15.2L11.3 21.6C11.7 22.0 12.3 22.0 12.7 21.6L19.4 15.2H4.6Z"
+            fill="#FFA000"
           />
         </svg>
       );

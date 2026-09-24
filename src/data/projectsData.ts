@@ -10,12 +10,13 @@ export interface Project {
   title: string;
   subtitle: string;
   category: 'Web App' | 'Solo Project' | 'AI / Data' | 'Game' | 'Design System' | 'Interactive 3D';
+  role: string;
   isSolo?: boolean;
   year: string;
   shortDescription: string;
   fullDescription: string;
   videoUrl?: string;
-  fallbackPoster: string;
+  fallbackPoster?: string;
   tags: string[];
   techStack: ('vercel' | 'react' | 'jsx' | 'tsx' | 'python' | 'mysql' | 'docker' | 'git' | 'github')[];
   liveUrl?: string;
@@ -24,20 +25,70 @@ export interface Project {
   features: string[];
 }
 
+export interface RoleBadgeStyle {
+  dot: string;
+  text: string;
+  border: string;
+  badgeBg: string;
+}
+
+export const getRoleBadgeStyle = (role?: string): RoleBadgeStyle => {
+  if (!role) {
+    return {
+      dot: 'bg-neutral-400',
+      text: 'text-neutral-300',
+      border: 'border-neutral-800',
+      badgeBg: 'bg-neutral-950',
+    };
+  }
+  const lower = role.toLowerCase();
+  if (lower.includes('ceo')) {
+    return {
+      dot: 'bg-amber-400',
+      text: 'text-amber-300',
+      border: 'border-amber-400/40',
+      badgeBg: 'bg-neutral-950',
+    };
+  }
+  if (lower.includes('lead')) {
+    return {
+      dot: 'bg-sky-400',
+      text: 'text-sky-300',
+      border: 'border-sky-400/40',
+      badgeBg: 'bg-neutral-950',
+    };
+  }
+  if (lower.includes('frontend')) {
+    return {
+      dot: 'bg-emerald-400',
+      text: 'text-emerald-300',
+      border: 'border-emerald-400/40',
+      badgeBg: 'bg-neutral-950',
+    };
+  }
+  return {
+    dot: 'bg-teal-400',
+    text: 'text-teal-300',
+    border: 'border-teal-400/40',
+    badgeBg: 'bg-neutral-950',
+  };
+};
+
 export const PROJECTS_DATA: Project[] = [
   {
     id: 'toothalie-clinic-suite',
     title: 'Toothalie Dental Clinic System',
     subtitle: 'Full-cycle clinic management with live queueing & push sync',
     category: 'Solo Project',
+    role: 'Solo Full Stack Developer',
     isSolo: true,
     year: '2025',
     shortDescription:
-      'End-to-end dental clinic management system featuring real-time appointment booking, doctor queues, and cross-platform push notifications via WebSockets and Firebase.',
+      'Solo Full Stack Developer for an end-to-end dental clinic management system featuring real-time appointment booking, doctor queues, and cross-platform push notifications via WebSockets and Firebase.',
     fullDescription:
-      'Architected cross-platform clinic operations with React web management and React Native mobile clients, powered by Symfony API backend, real-time doctor queue streaming, and automated SMS appointment reminders.',
+      'Sole developer architecting cross-platform clinic operations with React web management and React Native mobile clients, powered by Symfony API backend, real-time doctor queue streaming, and automated SMS appointment reminders.',
     videoUrl: toothalieVideo,
-    fallbackPoster: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80',
+    fallbackPoster: '',
     tags: ['Solo Project', 'React', 'React Native', 'Symfony', 'WebSockets', 'Firebase', 'MySQL'],
     techStack: ['react', 'jsx', 'mysql', 'docker', 'git', 'github'],
     liveUrl: 'https://github.com/clintestrellanes/toothalie',
@@ -50,14 +101,15 @@ export const PROJECTS_DATA: Project[] = [
     title: 'Student Management System (SMS) NORSU',
     subtitle: 'Enterprise university student management system & registration funnels',
     category: 'Web App',
+    role: 'Frontend Developer',
     year: '2026',
     shortDescription:
-      'Engineered modular SMS NORSU frontend pipelines using React, TypeScript, and TanStack Query, featuring multi-step registration funnels and automated client-side PDF export.',
+      'Frontend Developer responsible for engineering modular SMS NORSU web pipelines using React, TypeScript, and TanStack Query, featuring multi-step registration funnels and automated client-side PDF export.',
     fullDescription:
-      'Engineered at the NORSU Management Information System (MIS) & Electronic Data Processing (EDP) Unit. Built modular frontend services including multi-step student registration funnels, dynamic loadslip viewers, and automated client-side PDF/image export pipelines with TanStack Query optimistic caching.',
+      'Served as Frontend Developer at the NORSU Management Information System (MIS) & Electronic Data Processing (EDP) Unit. Engineered modular client-side architectures including multi-step student registration funnels, dynamic loadslip viewers, and automated client-side PDF/image export pipelines with TanStack Query optimistic caching.',
     videoUrl: smsVideo,
-    fallbackPoster: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80',
-    tags: ['React', 'TypeScript', 'TanStack Query', 'Tailwind CSS', 'Docker', 'REST API'],
+    fallbackPoster: '',
+    tags: ['Frontend Developer', 'React', 'TypeScript', 'TanStack Query', 'Tailwind CSS', 'Docker', 'REST API'],
     techStack: ['react', 'tsx', 'docker', 'git', 'github'],
     liveUrl: 'https://github.com/clintestrellanes',
     githubUrl: 'https://github.com/clintestrellanes',
@@ -69,14 +121,15 @@ export const PROJECTS_DATA: Project[] = [
     title: 'NIEL — Agentic AI University Assistant',
     subtitle: 'Stateful multi-agent RAG & campus navigation system for NORSU',
     category: 'AI / Data',
+    role: 'Lead Developer & Full Stack Developer',
     year: '2026',
     shortDescription:
-      'Domain-specific agentic RAG assistant for Negros Oriental State University featuring stateful LangGraph workflows, FAISS semantic search, and NetworkX campus pathfinding.',
+      'Lead Developer & Full Stack Developer architecting Negros Oriental State University\'s domain-specific agentic RAG assistant with stateful LangGraph workflows, FAISS semantic search, and NetworkX campus pathfinding.',
     fullDescription:
-      'Architected around a stateful graph execution model using LangGraph and FastAPI. Features unified intent routing, hallucination-evaluating critic loops, NetworkX Dijkstra campus navigation, academic schedule synthesis, and privacy-guarded MySQL telemetry.',
+      'Served as Lead Developer and Full Stack Developer, steering system architecture from research to implementation. Built around a stateful graph execution model using LangGraph and FastAPI, integrating unified intent routing, hallucination-evaluating critic loops, NetworkX Dijkstra campus navigation, academic schedule synthesis, and privacy-guarded MySQL telemetry.',
     videoUrl: nielVideo,
-    fallbackPoster: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80',
-    tags: ['LangGraph', 'FastAPI', 'FAISS', 'Python', 'React', 'NetworkX', 'RAG Pipeline'],
+    fallbackPoster: '',
+    tags: ['Lead Developer', 'Full Stack Developer', 'LangGraph', 'FastAPI', 'FAISS', 'Python', 'React', 'NetworkX'],
     techStack: ['python', 'react', 'tsx', 'docker', 'git', 'github'],
     liveUrl: 'https://github.com/clintestrellanes',
     githubUrl: 'https://github.com/clintestrellanes',
@@ -88,14 +141,15 @@ export const PROJECTS_DATA: Project[] = [
     title: 'TaskBuddy — Micro-Tasking Platform',
     subtitle: 'DICT PSC 9 Regional Finalist • Campus gig marketplace (On Hold)',
     category: 'Web App',
+    role: 'CEO & Lead Developer',
     year: '2025',
     shortDescription:
-      'Addresses the lack of safe, scam-free student gig opportunities with milestone escrow protection. Selected as a Top 25 Regional Finalist out of 146 startup entries in the DICT Philippine Startup Challenge 9 (Region VII) (Project on hold).',
+      'CEO & Lead Developer spearheading TaskBuddy to eliminate student gig scams and ghosting through milestone escrow protection. Selected as Top 25 Regional Finalist out of 146 startup entries in DICT PSC 9 (Region VII).',
     fullDescription:
-      'Conceived to eliminate rampant payment ghosting and informal gig fraud affecting university students seeking odd-jobs and peer freelance work. TaskBuddy establishes a protected campus micro-economy featuring milestone-based escrow holds, role-based access control (RBAC), and verified student profiles. Built with Python/FastAPI and React, TaskBuddy was selected into the prestigious Top 25 Regional Finalists out of 146 competing startup entries from 23 universities at the DICT Philippine Startup Challenge 9 (PSC 9, Central Visayas), and recognized as a 2025 Visayas Startup Awards Finalist (currently on hold).',
+      'Served as CEO and Lead Developer, conceiving the product vision, technical architecture, and business execution to eliminate rampant payment ghosting and informal gig fraud affecting university students. Led full-stack engineering with Python/FastAPI and React, establishing a protected campus micro-economy featuring milestone escrow holds, role-based access control (RBAC), and verified student profiles. Selected into the Top 25 Regional Finalists out of 146 competing entries from 23 universities at the DICT Philippine Startup Challenge 9 (PSC 9, Central Visayas) and 2025 Visayas Startup Awards Finalist.',
     videoUrl: '',
     fallbackPoster: taskbuddyPoster,
-    tags: ['On Hold', 'DICT PSC 9 Finalist', 'FastAPI', 'React', 'Tailwind CSS', 'MySQL', 'JWT Auth'],
+    tags: ['CEO & Lead Dev', 'DICT PSC 9 Finalist', 'FastAPI', 'React', 'Tailwind CSS', 'MySQL', 'JWT Auth'],
     techStack: ['python', 'react', 'tsx', 'mysql', 'vercel', 'git', 'github'],
     liveUrl: 'https://github.com/clintestrellanes/taskbuddy',
     githubUrl: 'https://github.com/clintestrellanes/taskbuddy',
@@ -112,12 +166,13 @@ export const PROJECTS_DATA: Project[] = [
     title: 'NORSU Surfers — Retro Arcade Web Game',
     subtitle: 'Exhibited retro arcade runner built for the CASICAS 2024 Game Showcase',
     category: 'Solo Project',
+    role: 'Solo Developer & Creator',
     isSolo: true,
     year: '2024',
     shortDescription:
-      'Retro arcade browser game developed and exhibited for the 2024 CASICAS Game Showcase, featuring CRT aesthetics, multi-lane obstacle dodging, and university phrase-collection gameplay.',
+      'Solo Developer & Creator for an arcade browser game developed and exhibited for the CASICAS Game Showcase, featuring CRT aesthetics, multi-lane obstacle dodging, and university phrase-collection gameplay.',
     fullDescription:
-      'Developed in 2024 upon invitation to showcase at the university event "CASICAS". Built using pure vanilla JavaScript (ES6+) and custom CSS CRT scanline shaders, the game features dynamic multi-velocity enemy spawning with road warning indicators, real-time AABB collision detection, active power-ups (Speed & Immunity), and a campus phrase-collection mechanic ("I LOVE NEGROS ORIENTAL STATE UNIVERSITY").',
+      'Developed as Solo Developer in 2024 upon invitation to showcase at the university event "CASICAS". Built using pure vanilla JavaScript (ES6+) and custom CSS CRT scanline shaders, the game features dynamic multi-velocity enemy spawning with road warning indicators, real-time AABB collision detection, active power-ups (Speed & Immunity), and a campus phrase-collection mechanic ("I LOVE NEGROS ORIENTAL STATE UNIVERSITY").',
     videoUrl: norsuSurfersVideo,
     fallbackPoster: norsuSurfersPoster,
     tags: ['Solo Project', 'JavaScript (ES6+)', 'Game Loop', 'CSS3 CRT Shaders', 'Arcade', 'AABB Collision', 'HTML5 Audio'],
